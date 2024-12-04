@@ -1,10 +1,9 @@
 package app.app.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,4 +17,12 @@ public class Carro {
     private long id;
     private String nome;
     private int ano;
+
+    //cria nao somente o carro, mas a marca tambem se ela nao existir
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Marca marca;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "carro_proprietario")
+    private List<Proprietario> proprietarios;
 }

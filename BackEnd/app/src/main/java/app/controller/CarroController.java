@@ -86,6 +86,7 @@ public class CarroController {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
+
     @GetMapping("/findByMarca")
     public ResponseEntity<List<Carro>> findByMarca(@RequestParam long idMarca){
         try {
@@ -97,6 +98,7 @@ public class CarroController {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
+
     @GetMapping("/findAcimaAno")
     public ResponseEntity<List<Carro>> findAcimaAno(@RequestParam int ano){
         try {

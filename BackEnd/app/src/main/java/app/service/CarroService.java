@@ -47,6 +47,7 @@ public class CarroService {
     public List<Carro> findByNome(String nome){
        return this.carroRepository.findByNome(nome);
     }
+
     public List<Carro> findByMarca(long idMarca){
         Marca marca = new Marca();
         marca.setId(idMarca);

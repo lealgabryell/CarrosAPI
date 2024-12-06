@@ -23,11 +23,10 @@ public class Carro {
 
     //cria nao somente o carro, mas a marca tambem se ela nao existir
     @ManyToOne(cascade = CascadeType.ALL)
-
     @JsonIgnoreProperties("carros")
     private Marca marca;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.PERSIST})
     @JoinTable(name = "carro_proprietario")
     private List<Proprietario> proprietarios;
 }

@@ -35,13 +35,11 @@ public class CarroService {
     }
 
     public List<Carro> findAll(){
-        List<Carro> lista = this.carroRepository.findAll();
-        return lista;
+        return this.carroRepository.findAll();
     }
 
     public Carro findById(@PathVariable long id){
-        Carro carro = this.carroRepository.findById(id).get();
-        return carro;
+        return this.carroRepository.findById(id).get();
     }
 
     public List<Carro> findByNome(String nome){

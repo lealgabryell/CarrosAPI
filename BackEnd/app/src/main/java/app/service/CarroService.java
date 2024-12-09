@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -42,17 +43,24 @@ public class CarroService {
         return this.carroRepository.findById(id).get();
     }
 
-    public List<Carro> findByNome(String nome){
+    public List<Carro> findByNome(@RequestParam String nome){
        return this.carroRepository.findByNome(nome);
     }
 
-    public List<Carro> findByMarca(long idMarca){
+    public List<Carro> findByMarca(@RequestParam long idMarca){
         Marca marca = new Marca();
         marca.setId(idMarca);
        return this.carroRepository.findByMarca(marca);
     }
 
-    public List<Carro> findAcimaAno(int ano){
+    public List<Carro> findAcimaAno(@RequestParam int ano){
        return this.carroRepository.findAcimaAno(ano);
+    }
+
+    public List<Carro> findAcimaValor(@RequestParam Double valor){
+       return this.carroRepository.findAcimaValor(valor);
+    }
+    public List<Carro> findAbaixoProprietarios(@RequestParam int nProprietarios){
+     return this.carroRepository.findAbaixoProprietarios(nProprietarios);
     }
 }

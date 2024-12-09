@@ -76,7 +76,7 @@ public class CarroController {
     }
 
     @GetMapping("/findByNome")
-    public ResponseEntity<List<Carro>> findByNome(@RequestParam String nome){
+    public ResponseEntity<List<Carro>> findByNome(@RequestParam String nome) {
         try {
 
             List<Carro> lista = this.carroService.findByNome(nome);
@@ -88,7 +88,7 @@ public class CarroController {
     }
 
     @GetMapping("/findByMarca")
-    public ResponseEntity<List<Carro>> findByMarca(@RequestParam long idMarca){
+    public ResponseEntity<List<Carro>> findByMarca(@RequestParam long idMarca) {
         try {
 
             List<Carro> lista = this.carroService.findByMarca(idMarca);
@@ -100,10 +100,34 @@ public class CarroController {
     }
 
     @GetMapping("/findAcimaAno")
-    public ResponseEntity<List<Carro>> findAcimaAno(@RequestParam int ano){
+    public ResponseEntity<List<Carro>> findAcimaAno(@RequestParam int ano) {
         try {
 
             List<Carro> lista = this.carroService.findAcimaAno(ano);
+            return new ResponseEntity<>(lista, HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/findAcimaValor")
+    public ResponseEntity<List<Carro>> findAcimaValor(@RequestParam Double valor) {
+        try {
+
+            List<Carro> lista = this.carroService.findAcimaValor(valor);
+            return new ResponseEntity<>(lista, HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/findAbaixoProprietarios")
+    public ResponseEntity<List<Carro>> findAbaixoProprietarios(@RequestParam int nProprietarios) {
+        try {
+
+            List<Carro> lista = this.carroService.findAbaixoProprietarios(nProprietarios);
             return new ResponseEntity<>(lista, HttpStatus.OK);
 
         } catch (Exception e) {

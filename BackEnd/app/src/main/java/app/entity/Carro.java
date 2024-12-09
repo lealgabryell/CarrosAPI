@@ -29,4 +29,6 @@ public class Carro {
     @ManyToMany(cascade = {CascadeType.PERSIST})
     @JoinTable(name = "carro_proprietario")
     private List<Proprietario> proprietarios;
+
+    private Double valorFIPE;
 }

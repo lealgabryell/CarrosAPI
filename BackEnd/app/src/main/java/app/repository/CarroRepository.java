@@ -15,4 +15,10 @@ public interface CarroRepository extends JpaRepository<Carro, Long> {
 
     @Query("FROM Carro c WHERE c.ano > :ano")
     public List<Carro> findAcimaAno(int ano);
+
+    @Query("FROM Carro c WHERE c.valorFIPE >= :valor")
+    public List<Carro> findAcimaValor(Double valor);
+
+    @Query("SELECT c FROM Carro c WHERE (SELECT COUNT(p) FROM c.proprietarios p) < :nProprietarios")
+    public List<Carro> findAbaixoProprietarios(int nProprietarios);
 }

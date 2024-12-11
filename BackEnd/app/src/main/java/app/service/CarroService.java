@@ -65,11 +65,5 @@ public class CarroService {
         return this.carroRepository.findAbaixoProprietarios(nProprietarios);
     }
 
-    public int soma(List<Integer> lista) {
-        int soma = 0;
-        for (Integer integer : lista) {
-            soma += integer;
-        }
-        return soma;
-    }
+
 }

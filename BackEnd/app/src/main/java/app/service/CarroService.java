@@ -25,6 +25,18 @@ public class CarroService {
         return true;
     }
 
+    public boolean verificaValorDouble(Double valor){
+        if(valor < 0){
+            throw new RuntimeException();
+        }
+        return true;
+    }
+    public boolean verificaValorInt(int valor){
+        if(valor < 0){
+            throw new RuntimeException();
+        }
+        return true;
+    }
     public String save(@RequestBody Carro carro) {
 
         this.verificarNomeCarro(carro.getNome(), carro.getAno());
@@ -72,10 +84,12 @@ public class CarroService {
     }
 
     public List<Carro> findAcimaValor(@RequestParam Double valor) {
+        this.verificaValorDouble(valor);
         return this.carroRepository.findAcimaValor(valor);
     }
 
     public List<Carro> findAbaixoProprietarios(@RequestParam int nProprietarios) {
+        this.verificaValorInt(nProprietarios);
         return this.carroRepository.findAbaixoProprietarios(nProprietarios);
     }
 

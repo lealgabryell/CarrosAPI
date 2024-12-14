@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CarroService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">app.service</a> &gt; <span class="el_source">CarroService.java</span></div><h1>CarroService.java</h1><pre class="source lang-java linenums">package app.service;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CarroService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">app.service</a> &gt; <span class="el_source">CarroService.java</span></div><h1>CarroService.java</h1><pre class="source lang-java linenums">package app.service;
 
 import app.entity.Carro;
 import app.entity.Marca;
@@ -25,58 +25,72 @@ import java.util.List;
 <span class="fc" id="L25">        return true;</span>
     }
 
+    public boolean verificaValorDouble(Double valor){
+<span class="fc bfc" id="L29" title="All 2 branches covered.">        if(valor &lt; 0){</span>
+<span class="fc" id="L30">            throw new RuntimeException();</span>
+        }
+<span class="fc" id="L32">        return true;</span>
+    }
+    public boolean verificaValorInt(int valor){
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if(valor &lt; 0){</span>
+<span class="fc" id="L36">            throw new RuntimeException();</span>
+        }
+<span class="fc" id="L38">        return true;</span>
+    }
     public String save(@RequestBody Carro carro) {
 
-<span class="nc" id="L30">        this.verificarNomeCarro(carro.getNome(), carro.getAno());</span>
+<span class="nc" id="L42">        this.verificarNomeCarro(carro.getNome(), carro.getAno());</span>
 
-<span class="nc" id="L32">        this.carroRepository.save(carro);</span>
-<span class="nc" id="L33">        return &quot;Carro salvo com sucesso!&quot;;</span>
+<span class="nc" id="L44">        this.carroRepository.save(carro);</span>
+<span class="nc" id="L45">        return &quot;Carro salvo com sucesso!&quot;;</span>
     }
 
     public String update(@RequestBody Carro carro, @PathVariable long id) {
 
-<span class="nc" id="L38">        this.verificarNomeCarro(carro.getNome(), carro.getAno());</span>
+<span class="nc" id="L50">        this.verificarNomeCarro(carro.getNome(), carro.getAno());</span>
 
         //Setando o ID de um objeto antes de salva-lo no BD garante que o SGBD
         // vai entender que esse carro ja existe no BD e ele apenas foi modificado.
-<span class="nc" id="L42">        carro.setId(id);</span>
-<span class="nc" id="L43">        this.carroRepository.save(carro);</span>
-<span class="nc" id="L44">        return &quot;Carro atualizado com sucesso!&quot;;</span>
+<span class="nc" id="L54">        carro.setId(id);</span>
+<span class="nc" id="L55">        this.carroRepository.save(carro);</span>
+<span class="nc" id="L56">        return &quot;Carro atualizado com sucesso!&quot;;</span>
     }
 
     public String delete(@PathVariable long id) {
-<span class="nc" id="L48">        this.carroRepository.deleteById(id);</span>
-<span class="nc" id="L49">        return &quot;Carro deletado com sucesso!&quot;;</span>
+<span class="nc" id="L60">        this.carroRepository.deleteById(id);</span>
+<span class="nc" id="L61">        return &quot;Carro deletado com sucesso!&quot;;</span>
     }
 
     public List&lt;Carro&gt; findAll() {
-<span class="fc" id="L53">        return this.carroRepository.findAll();</span>
+<span class="fc" id="L65">        return this.carroRepository.findAll();</span>
     }
 
     public Carro findById(@PathVariable long id) {
-<span class="fc" id="L57">        return this.carroRepository.findById(id).get();</span>
+<span class="fc" id="L69">        return this.carroRepository.findById(id).get();</span>
     }
 
     public List&lt;Carro&gt; findByNome(@RequestParam String nome) {
-<span class="fc" id="L61">        return this.carroRepository.findByNome(nome);</span>
+<span class="fc" id="L73">        return this.carroRepository.findByNome(nome);</span>
     }
 
     public List&lt;Carro&gt; findByMarca(@RequestParam long idMarca) {
-<span class="nc" id="L65">        Marca marca = new Marca();</span>
-<span class="nc" id="L66">        marca.setId(idMarca);</span>
-<span class="nc" id="L67">        return this.carroRepository.findByMarca(marca);</span>
+<span class="nc" id="L77">        Marca marca = new Marca();</span>
+<span class="nc" id="L78">        marca.setId(idMarca);</span>
+<span class="nc" id="L79">        return this.carroRepository.findByMarca(marca);</span>
     }
 
     public List&lt;Carro&gt; findAcimaAno(@RequestParam int ano) {
-<span class="fc" id="L71">        return this.carroRepository.findAcimaAno(ano);</span>
+<span class="fc" id="L83">        return this.carroRepository.findAcimaAno(ano);</span>
     }
 
     public List&lt;Carro&gt; findAcimaValor(@RequestParam Double valor) {
-<span class="fc" id="L75">        return this.carroRepository.findAcimaValor(valor);</span>
+<span class="fc" id="L87">        this.verificaValorDouble(valor);</span>
+<span class="fc" id="L88">        return this.carroRepository.findAcimaValor(valor);</span>
     }
 
     public List&lt;Carro&gt; findAbaixoProprietarios(@RequestParam int nProprietarios) {
-<span class="nc" id="L79">        return this.carroRepository.findAbaixoProprietarios(nProprietarios);</span>
+<span class="fc" id="L92">        this.verificaValorInt(nProprietarios);</span>
+<span class="fc" id="L93">        return this.carroRepository.findAbaixoProprietarios(nProprietarios);</span>
     }
 
 

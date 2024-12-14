@@ -55,6 +55,7 @@ public class CarroControllerTest {
         //utiliza mock para que nao haja conexao com banco de dados
         when(carroRepository.findAll()).thenReturn(lista); //findAll
         when(carroRepository.findById(1L)).thenReturn(Optional.of(c1)); //findById
+        when(carroRepository.findByNome("Kicks")).thenReturn(lista); //findByNome
 
         //OBS.: o se mocka testes que cheguem no repository, ou seja, so a
         // classe repository deve ser mockada
@@ -99,5 +100,11 @@ public class CarroControllerTest {
         ResponseEntity<Carro> retorno = this.carroController.findById(-1L);
 
         assertEquals(HttpStatus.BAD_REQUEST, retorno.getStatusCode());
+    }
+    @Test
+    void cenario06(){
+        ResponseEntity<List<Carro>> retorno = this.carroController.findByNome("Kicks");
+
+        assertEquals("Kicks", retorno.getBody().get(1).getNome());
     }
 }

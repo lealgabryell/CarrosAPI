@@ -1,0 +1,7 @@
+app\entity\Carro.class
+app\controller\CarroController.class
+app\entity\Proprietario.class
+app\service\CarroService.class
+app\entity\Marca.class
+app\Application.class
+app\repository\CarroRepository.class

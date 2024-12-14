@@ -17,12 +17,26 @@ public class CarroService {
     @Autowired
     private CarroRepository carroRepository;
 
+    //REGRA DE NEGOCIO DE VALIDACAO DE NOME DE CARRO
+    public boolean verificarNomeCarro(String nome, int ano) {
+        if (nome.equals("Jeep Compass") && ano < 2006) {
+            throw new RuntimeException();
+        }
+        return true;
+    }
+
     public String save(@RequestBody Carro carro) {
+
+        this.verificarNomeCarro(carro.getNome(), carro.getAno());
+
         this.carroRepository.save(carro);
         return "Carro salvo com sucesso!";
     }
 
     public String update(@RequestBody Carro carro, @PathVariable long id) {
+
+        this.verificarNomeCarro(carro.getNome(), carro.getAno());
+
         //Setando o ID de um objeto antes de salva-lo no BD garante que o SGBD
         // vai entender que esse carro ja existe no BD e ele apenas foi modificado.
         carro.setId(id);

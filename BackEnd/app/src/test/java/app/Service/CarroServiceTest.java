@@ -80,4 +80,18 @@ public class CarroServiceTest {
         List<Carro> lista = carroService.findAcimaValor(20000.00);
         assertEquals("Kicks", lista.get(1).getNome());
     }
+
+    //testes unitarios
+    @Test
+    public void cenario05(){
+        boolean retorno = this.carroService.verificarNomeCarro("Jeep Compass", 2006);
+
+        assertEquals(true, retorno);
+    }
+    @Test
+    public void cenario06(){
+        assertThrows(Exception.class, () -> {
+           boolean retorno = this.carroService.verificarNomeCarro("Jeep Compass", 1995);
+        });
+    }
 }

@@ -25,18 +25,40 @@ public class CarroService {
         return true;
     }
 
+    //REGRA DE NEGOCIO DE VALIDACAO DE VALOR DOUBLE
     public boolean verificaValorDouble(Double valor){
         if(valor < 0){
             throw new RuntimeException();
         }
         return true;
     }
+
+    //REGRA DE NEGOCIO DE VALIDACAO DE VALOR INTEGER
     public boolean verificaValorInt(int valor){
         if(valor < 0){
             throw new RuntimeException();
         }
         return true;
     }
+
+    //REGRA DE NEGOCIO DE VALIDACAO DE NOME NA LISTA
+    public boolean verificaNomeNaLista(List<Carro> lista, String nome){
+        for(Carro c : lista){
+            if(c.getNome().equalsIgnoreCase(nome)){
+                throw new RuntimeException();
+            }
+        }
+        return true;
+    }
+
+    //REGRA DE NEGOCIO DE VALIDACAO DE STRING VAZIA
+    public boolean verificaStringVazia(String nome){
+            if(nome.isEmpty()){
+                throw new RuntimeException();
+            }
+        return true;
+    }
+
     public String save(@RequestBody Carro carro) {
 
         this.verificarNomeCarro(carro.getNome(), carro.getAno());
@@ -48,6 +70,7 @@ public class CarroService {
     public String update(@RequestBody Carro carro, @PathVariable long id) {
 
         this.verificarNomeCarro(carro.getNome(), carro.getAno());
+        this.verificaStringVazia(carro.getNome());
 
         //Setando o ID de um objeto antes de salva-lo no BD garante que o SGBD
         // vai entender que esse carro ja existe no BD e ele apenas foi modificado.
@@ -70,6 +93,8 @@ public class CarroService {
     }
 
     public List<Carro> findByNome(@RequestParam String nome) {
+        this.verificaStringVazia(nome);
+
         return this.carroRepository.findByNome(nome);
     }
 
@@ -92,6 +117,4 @@ public class CarroService {
         this.verificaValorInt(nProprietarios);
         return this.carroRepository.findAbaixoProprietarios(nProprietarios);
     }
-
-
 }

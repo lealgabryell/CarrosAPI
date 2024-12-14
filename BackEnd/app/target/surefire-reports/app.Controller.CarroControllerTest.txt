@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: app.Controller.CarroControllerTest
 -------------------------------------------------------------------------------
-Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 13.12 s -- in app.Controller.CarroControllerTest
+Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 14.31 s -- in app.Controller.CarroControllerTest

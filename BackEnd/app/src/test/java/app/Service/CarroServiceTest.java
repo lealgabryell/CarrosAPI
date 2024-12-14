@@ -94,4 +94,28 @@ public class CarroServiceTest {
            boolean retorno = this.carroService.verificarNomeCarro("Jeep Compass", 1995);
         });
     }
+    @Test
+    public void cenario07(){
+        boolean retorno = this.carroService.verificaValorInt(1);
+
+        assertEquals(true, retorno);
+    }
+    @Test
+    public void cenario08(){
+        assertThrows(Exception.class, () -> {
+            boolean retorno = this.carroService.verificaValorInt(-1);
+        });
+    }
+    @Test
+    public void cenario09(){
+        boolean retorno = this.carroService.verificaValorDouble(1D);
+
+        assertEquals(true, retorno);
+    }
+    @Test
+    public void cenario10(){
+        assertThrows(Exception.class, () -> {
+            boolean retorno = this.carroService.verificaValorDouble(-1D);
+        });
+    }
 }

@@ -21,7 +21,7 @@ public class CarroController {
         try {
             String mensagem = this.carroService.save(carro);
 
-            return new ResponseEntity<>(mensagem, HttpStatus.OK);
+            return new ResponseEntity<>(mensagem, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }

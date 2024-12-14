@@ -19,80 +19,103 @@ import java.util.List;
 
     //REGRA DE NEGOCIO DE VALIDACAO DE NOME DE CARRO
     public boolean verificarNomeCarro(String nome, int ano) {
-<span class="pc bpc" id="L22" title="1 of 4 branches missed.">        if (nome.equals(&quot;Jeep Compass&quot;) &amp;&amp; ano &lt; 2006) {</span>
+<span class="fc bfc" id="L22" title="All 4 branches covered.">        if (nome.equals(&quot;Jeep Compass&quot;) &amp;&amp; ano &lt; 2006) {</span>
 <span class="fc" id="L23">            throw new RuntimeException();</span>
         }
 <span class="fc" id="L25">        return true;</span>
     }
 
+    //REGRA DE NEGOCIO DE VALIDACAO DE VALOR DOUBLE
     public boolean verificaValorDouble(Double valor){
-<span class="fc bfc" id="L29" title="All 2 branches covered.">        if(valor &lt; 0){</span>
-<span class="fc" id="L30">            throw new RuntimeException();</span>
+<span class="fc bfc" id="L30" title="All 2 branches covered.">        if(valor &lt; 0){</span>
+<span class="fc" id="L31">            throw new RuntimeException();</span>
         }
-<span class="fc" id="L32">        return true;</span>
+<span class="fc" id="L33">        return true;</span>
     }
+
+    //REGRA DE NEGOCIO DE VALIDACAO DE VALOR INTEGER
     public boolean verificaValorInt(int valor){
-<span class="fc bfc" id="L35" title="All 2 branches covered.">        if(valor &lt; 0){</span>
-<span class="fc" id="L36">            throw new RuntimeException();</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">        if(valor &lt; 0){</span>
+<span class="fc" id="L39">            throw new RuntimeException();</span>
         }
-<span class="fc" id="L38">        return true;</span>
+<span class="fc" id="L41">        return true;</span>
     }
+
+    //REGRA DE NEGOCIO DE VALIDACAO DE NOME NA LISTA
+    public boolean verificaNomeNaLista(List&lt;Carro&gt; lista, String nome){
+<span class="nc bnc" id="L46" title="All 2 branches missed.">        for(Carro c : lista){</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">            if(c.getNome().equalsIgnoreCase(nome)){</span>
+<span class="nc" id="L48">                throw new RuntimeException();</span>
+            }
+<span class="nc" id="L50">        }</span>
+<span class="nc" id="L51">        return true;</span>
+    }
+
+    //REGRA DE NEGOCIO DE VALIDACAO DE STRING VAZIA
+    public boolean verificaStringVazia(String nome){
+<span class="fc bfc" id="L56" title="All 2 branches covered.">            if(nome.isEmpty()){</span>
+<span class="fc" id="L57">                throw new RuntimeException();</span>
+            }
+<span class="fc" id="L59">        return true;</span>
+    }
+
     public String save(@RequestBody Carro carro) {
 
-<span class="nc" id="L42">        this.verificarNomeCarro(carro.getNome(), carro.getAno());</span>
+<span class="fc" id="L64">        this.verificarNomeCarro(carro.getNome(), carro.getAno());</span>
 
-<span class="nc" id="L44">        this.carroRepository.save(carro);</span>
-<span class="nc" id="L45">        return &quot;Carro salvo com sucesso!&quot;;</span>
+<span class="fc" id="L66">        this.carroRepository.save(carro);</span>
+<span class="fc" id="L67">        return &quot;Carro salvo com sucesso!&quot;;</span>
     }
 
     public String update(@RequestBody Carro carro, @PathVariable long id) {
 
-<span class="nc" id="L50">        this.verificarNomeCarro(carro.getNome(), carro.getAno());</span>
+<span class="nc" id="L72">        this.verificarNomeCarro(carro.getNome(), carro.getAno());</span>
+<span class="nc" id="L73">        this.verificaStringVazia(carro.getNome());</span>
 
         //Setando o ID de um objeto antes de salva-lo no BD garante que o SGBD
         // vai entender que esse carro ja existe no BD e ele apenas foi modificado.
-<span class="nc" id="L54">        carro.setId(id);</span>
-<span class="nc" id="L55">        this.carroRepository.save(carro);</span>
-<span class="nc" id="L56">        return &quot;Carro atualizado com sucesso!&quot;;</span>
+<span class="nc" id="L77">        carro.setId(id);</span>
+<span class="nc" id="L78">        this.carroRepository.save(carro);</span>
+<span class="nc" id="L79">        return &quot;Carro atualizado com sucesso!&quot;;</span>
     }
 
     public String delete(@PathVariable long id) {
-<span class="nc" id="L60">        this.carroRepository.deleteById(id);</span>
-<span class="nc" id="L61">        return &quot;Carro deletado com sucesso!&quot;;</span>
+<span class="nc" id="L83">        this.carroRepository.deleteById(id);</span>
+<span class="nc" id="L84">        return &quot;Carro deletado com sucesso!&quot;;</span>
     }
 
     public List&lt;Carro&gt; findAll() {
-<span class="fc" id="L65">        return this.carroRepository.findAll();</span>
+<span class="fc" id="L88">        return this.carroRepository.findAll();</span>
     }
 
     public Carro findById(@PathVariable long id) {
-<span class="fc" id="L69">        return this.carroRepository.findById(id).get();</span>
+<span class="fc" id="L92">        return this.carroRepository.findById(id).get();</span>
     }
 
     public List&lt;Carro&gt; findByNome(@RequestParam String nome) {
-<span class="fc" id="L73">        return this.carroRepository.findByNome(nome);</span>
+<span class="fc" id="L96">        this.verificaStringVazia(nome);</span>
+
+<span class="fc" id="L98">        return this.carroRepository.findByNome(nome);</span>
     }
 
     public List&lt;Carro&gt; findByMarca(@RequestParam long idMarca) {
-<span class="nc" id="L77">        Marca marca = new Marca();</span>
-<span class="nc" id="L78">        marca.setId(idMarca);</span>
-<span class="nc" id="L79">        return this.carroRepository.findByMarca(marca);</span>
+<span class="nc" id="L102">        Marca marca = new Marca();</span>
+<span class="nc" id="L103">        marca.setId(idMarca);</span>
+<span class="nc" id="L104">        return this.carroRepository.findByMarca(marca);</span>
     }
 
     public List&lt;Carro&gt; findAcimaAno(@RequestParam int ano) {
-<span class="fc" id="L83">        return this.carroRepository.findAcimaAno(ano);</span>
+<span class="fc" id="L108">        return this.carroRepository.findAcimaAno(ano);</span>
     }
 
     public List&lt;Carro&gt; findAcimaValor(@RequestParam Double valor) {
-<span class="fc" id="L87">        this.verificaValorDouble(valor);</span>
-<span class="fc" id="L88">        return this.carroRepository.findAcimaValor(valor);</span>
+<span class="fc" id="L112">        this.verificaValorDouble(valor);</span>
+<span class="fc" id="L113">        return this.carroRepository.findAcimaValor(valor);</span>
     }
 
     public List&lt;Carro&gt; findAbaixoProprietarios(@RequestParam int nProprietarios) {
-<span class="fc" id="L92">        this.verificaValorInt(nProprietarios);</span>
-<span class="fc" id="L93">        return this.carroRepository.findAbaixoProprietarios(nProprietarios);</span>
+<span class="fc" id="L117">        this.verificaValorInt(nProprietarios);</span>
+<span class="fc" id="L118">        return this.carroRepository.findAbaixoProprietarios(nProprietarios);</span>
     }
-
-
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

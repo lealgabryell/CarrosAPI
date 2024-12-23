@@ -62,17 +62,17 @@ public class CarroControllerTest {
         //utiliza mock para que nao haja conexao com banco de dados
         when(carroRepository.findAll()).thenReturn(lista); //findAll
         when(carroRepository.findById(1L)).thenReturn(Optional.of(c1)); //findById
-        when(carroRepository.findAcimaValor(50000.00D)).thenReturn(lista); //findByMarca
+        when(carroRepository.findAcimaValor(50000.00D)).thenReturn(lista); //findAcimaValor
         when(carroRepository.findAbaixoProprietarios(1)).thenReturn(lista); //findByMarca
         when(carroRepository.save(new Carro())).thenReturn(c1); //findByMarca
         when(carroRepository.findByNome("Kicks")).thenReturn(lista); //findByNome
         when(carroRepository.findByNome("")).thenReturn(null); //findByNome
-        //OBS.: o se mocka testes que cheguem no repository, ou seja, so a
+        //OBS.: So se mocka testes que cheguem no repository, ou seja, so a
         // classe repository deve ser mockada
     }
 
     @Test
-    void cenario01() {
+    void findAll_retornaOK() {
         //Teste de integracao do metodo findAll() para saber o status http do retorno
         //COM MOCK/MOCKITO
         ResponseEntity<List<Carro>> retorno = this.carroController.findAll();
@@ -81,7 +81,7 @@ public class CarroControllerTest {
     }
 
     @Test
-    void cenario02() {
+    void findAll_retornaTamanhoDaLista_2() {
         //Teste de integracao do metodo findAll() para saber o tamanho da lista de retorno
         //COM MOCK/MOCKITO
         ResponseEntity<List<Carro>> retorno = this.carroController.findAll();
@@ -90,7 +90,7 @@ public class CarroControllerTest {
     }
 
     @Test
-    void cenario03() {
+    void findById_recebe1_retornaOK() {
         //Teste de integracao do metodo findById() para saber o status http do retorno
         //COM MOCK/MOCKITO
         ResponseEntity<Carro> retorno = this.carroController.findById(1L);
@@ -99,7 +99,7 @@ public class CarroControllerTest {
     }
 
     @Test
-    void cenario04() {
+    void findById_recebe1_retornaUnoMile() {
         //Teste de integracao do metodo findById() para saber qual objeto do retorno
         //COM MOCK/MOCKITO
         ResponseEntity<Carro> retorno = this.carroController.findById(1L);
@@ -108,7 +108,7 @@ public class CarroControllerTest {
     }
 
     @Test
-    void cenario05() {
+    void findById_recebeLongNegativo_retornaBadRequest() {
         //Teste de integracao do metodo findById() para saber qual objeto do retorno
         //COM MOCK/MOCKITO
         ResponseEntity<Carro> retorno = this.carroController.findById(-1L);
@@ -117,56 +117,63 @@ public class CarroControllerTest {
     }
 
     @Test
-    void cenario06() {
+    void findByNome_recebeStringVazia_retornaBadRequest() {
+        ResponseEntity<List<Carro>> retorno = this.carroController.findByNome("");
+
+        assertEquals(HttpStatus.BAD_REQUEST, retorno.getStatusCode());
+    }
+
+    @Test
+    void findByNome_recebeKicks_retornaKicks() {
         ResponseEntity<List<Carro>> retorno = this.carroController.findByNome("Kicks");
 
         assertEquals("Kicks", retorno.getBody().get(1).getNome());
     }
 
     @Test
-    void cenario07() {
-        ResponseEntity<List<Carro>> retorno = this.carroController.findAcimaValor(50000.00);
+    void findAcimaValor_recebe5000_retornaOK() {
+        ResponseEntity<List<Carro>> retorno = this.carroController.findAcimaValor(50000.00D);
 
         assertEquals(HttpStatus.OK, retorno.getStatusCode());
     }
 
     @Test
-    void cenario08() {
+    void findAcimaValor_recebe5000_retornaKicks() {
         ResponseEntity<List<Carro>> retorno = this.carroController.findAcimaValor(50000.00);
 
         assertEquals("Kicks", retorno.getBody().get(1).getNome());
     }
 
     @Test
-    void cenario09() {
+    void findAcimaValor_recebeDoubleNegativo_retornaBadRequest() {
         ResponseEntity<List<Carro>> retorno = this.carroController.findAcimaValor(-1D);
 
         assertEquals(HttpStatus.BAD_REQUEST, retorno.getStatusCode());
     }
 
     @Test
-    void cenario10() {
+    void findAbaixoProprietarios_recebeInteiroNegativ_retornaBadRequest() {
         ResponseEntity<List<Carro>> retorno = this.carroController.findAbaixoProprietarios(-1);
 
         assertEquals(HttpStatus.BAD_REQUEST, retorno.getStatusCode());
     }
 
     @Test
-    void cenario11() {
+    void findAbaixoProprietarios_recebeInteiro1_retornaOK() {
         ResponseEntity<List<Carro>> retorno = this.carroController.findAbaixoProprietarios(1);
 
         assertEquals(HttpStatus.OK, retorno.getStatusCode());
     }
 
     @Test
-    void cenario12() {
+    void findAbaixoProprietarios_recebeInteiro1_retornaMaria() {
         ResponseEntity<List<Carro>> retorno = this.carroController.findAbaixoProprietarios(1);
 
         assertEquals("Maria", retorno.getBody().get(1).getProprietarios().get(0).getNome());
     }
 
     @Test
-    void cenario13() {
+    void save_recebeCarro_retornaCREATED() {
         Carro c1 = new Carro();
         c1.setAno(2009);
         c1.setMarca(new Marca());
@@ -182,17 +189,11 @@ public class CarroControllerTest {
     }
 
     @Test
-    void cenario14() {
+    void save_recebeCarroNull_retornaBadRequest() {
         Carro c1 = new Carro(); //CARRO COM EMPTY BODY GERA NULLPOINTER E LEVA O METODO AO CATCH(BAD REQUEST)
         ResponseEntity<String> retorno = this.carroController.save(c1);
 
         assertEquals(HttpStatus.BAD_REQUEST, retorno.getStatusCode());
     }
 
-    @Test
-    void cenario15(){
-        ResponseEntity<List<Carro>> retorno = this.carroController.findByNome("");
-
-        assertEquals(HttpStatus.BAD_REQUEST, retorno.getStatusCode());
-    }
 }

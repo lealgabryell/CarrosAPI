@@ -1,7 +1,7 @@
-import { Proprietarios } from './proprietarios';
+import { Proprietario } from './proprietario';
 
-describe('Proprietarios', () => {
+describe('Proprietario', () => {
   it('should create an instance', () => {
-    expect(new Proprietarios()).toBeTruthy();
+    expect(new Proprietario()).toBeTruthy();
   });
 });

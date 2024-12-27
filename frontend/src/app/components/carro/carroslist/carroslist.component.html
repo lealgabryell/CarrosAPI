@@ -6,6 +6,11 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-body">
+          <div class="direita">
+            <button type="button" class="btn btn-info  btn-rounded" mdbRipple routerLink="/admin/carros/new">Novo</button>
+          </div>
+          <br />
+
           <table border="1" class="table table-striped">
             <thead>
               <tr>
@@ -13,7 +18,8 @@
                 <th>NOME</th>
                 <th>MARCA</th>
                 <th>VALOR</th>
-                <th>NUM PROPRIETARIOS</th>
+                <th>PROPRIETARIOS</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -21,9 +27,13 @@
               <tr>
                 <td>{{carro.id}}</td>
                 <td>{{carro.nome}}</td>
-                <td>{{carro.marca}}</td>
+                <td>{{carro.marca.nome}}</td>
                 <td>R${{carro.valorFIPE}}</td>
                 <td>{{carro.proprietarios.length}}</td>
+                <td class="direita">
+                  <button type="button" class="btn btn-warning  btn-rounded" mdbRipple routerLink="/admin/carros/edit/{{carro.id}}">Edit</button>
+                  <button type="button" class="btn btn-danger  btn-rounded" mdbRipple (click)="deletar()">Excluir</button>
+                </td>
               </tr>
               }
             </tbody>

@@ -1,4 +1,4 @@
-export class Proprietarios {
+export class Proprietario {
   id!: number;
   nome!: string;
   idade!: number;

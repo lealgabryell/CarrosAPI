@@ -1,11 +1,11 @@
 import { Marca } from './marca';
-import { Proprietarios } from './proprietario';
+import { Proprietario } from './proprietario';
 
 export class Carro {
   id!: number;
   nome!: string;
   ano!: number;
   marca!: Marca;
-  proprietarios!: Proprietarios[];
+  proprietarios!: Proprietario[];
   valorFIPE!: number;
 }

@@ -1,1 +1,35 @@
-<p>carroslist works!</p>
+<br />
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <table border="1" class="table table-striped">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>NOME</th>
+                <th>MARCA</th>
+                <th>VALOR</th>
+                <th>NUM PROPRIETARIOS</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (carro of lista; track $index) {
+              <tr>
+                <td>{{carro.id}}</td>
+                <td>{{carro.nome}}</td>
+                <td>{{carro.marca}}</td>
+                <td>R${{carro.valorFIPE}}</td>
+                <td>{{carro.proprietarios.length}}</td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

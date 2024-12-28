@@ -18,7 +18,7 @@
                 <th>NOME</th>
                 <th>MARCA</th>
                 <th>VALOR</th>
-                <th>PROPRIETARIOS</th>
+                <th>PROPRIETÁRIOS</th>
                 <th></th>
               </tr>
             </thead>
@@ -31,8 +31,8 @@
                 <td>R${{carro.valorFIPE}}</td>
                 <td>{{carro.proprietarios.length}}</td>
                 <td class="direita">
-                  <button type="button" class="btn btn-warning  btn-rounded" mdbRipple routerLink="/admin/carros/edit/{{carro.id}}">Edit</button>
-                  <button type="button" class="btn btn-danger  btn-rounded" mdbRipple (click)="deletar()">Excluir</button>
+                    <button type="button" class="btn btn-warning  btn-rounded" mdbRipple routerLink="/admin/carros/edit/{{carro.id}}">Edit</button>
+                    <button type="button" class="btn btn-danger  btn-rounded" mdbRipple (click)="deleteById(carro)">Excluir</button>
                 </td>
               </tr>
               }

@@ -16,10 +16,9 @@ export class CarroslistComponent {
 
   constructor() {
     let proprietario1 = new Proprietario();
-    proprietario1.id= 1;
-    proprietario1.idade= 22;
-    proprietario1.nome= 'Myguell';
-
+    proprietario1.id = 1;
+    proprietario1.idade = 22;
+    proprietario1.nome = 'Myguell';
 
     let carro1 = new Carro();
     carro1.id = 1;
@@ -38,7 +37,9 @@ export class CarroslistComponent {
     this.lista.push(carro1);
   }
 
-  deletar(){
-    
+  deleteById(carro: Carro) {
+    this.lista.findIndex((x) => {
+      return x.id == carro.id;
+    });
   }
 }

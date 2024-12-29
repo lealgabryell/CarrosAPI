@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Marca } from '../../../models/marca';
 
 @Component({
   selector: 'app-marcadetails',
@@ -8,5 +9,7 @@ import { Component } from '@angular/core';
   styleUrl: './marcadetails.component.scss'
 })
 export class MarcasdetailsComponent {
+
+   lista: Marca[] = []; 
 
 }

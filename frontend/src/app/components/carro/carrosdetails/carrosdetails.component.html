@@ -9,26 +9,26 @@
           <h3>Cadastro de carro:</h3>
           <br />
           <mdb-form-control>
-            <input mdbInput type="text" id="nome" class="form-control" [(ngModel)]="carro.nome"/>
+            <input mdbInput type="text" id="nome" class="form-control" [(ngModel)]="carro.nome" />
             <label mdbLabel class="form-label" for="form1">Nome</label>
           </mdb-form-control>
           <br />
           <mdb-form-control>
-            <input mdbInput type="text" id="password" class="form-control" [(ngModel)]="carro.marca"/>
+            <input mdbInput type="text" id="marca" class="form-control" [(ngModel)]="carro.marca.nome" />
             <label mdbLabel class="form-label" for="form1">Marca</label>
           </mdb-form-control>
           <br />
           <mdb-form-control>
-            <input mdbInput type="password" id="text" class="form-control" [(ngModel)]="carro.ano"/>
+            <input mdbInput type="text" id="ano" class="form-control" [(ngModel)]="carro.ano" />
             <label mdbLabel class="form-label" for="form1">Ano</label>
           </mdb-form-control>
           <br />
           <mdb-form-control>
-            <input mdbInput type="text" id="text" class="form-control" [(ngModel)]="carro.valorFIPE"/>
+            <input mdbInput type="text" id="valor" class="form-control" [(ngModel)]="carro.valorFIPE" />
             <label mdbLabel class="form-label" for="form1">Valor em R$</label>
           </mdb-form-control>
           <br />
-          
+
           <button type="button" class="btn btn-primary btn-rounded" mdbRipple (click)="save()">Salvar</button>
         </div>
       </div>

@@ -6,8 +6,9 @@
     <div class="col-lg-12">
       <div class="card">
         <div class="card-body">
+
           <div class="direita">
-            <button type="button" class="btn btn-info  btn-rounded" mdbRipple routerLink="/admin/carros/new">Novo</button>
+            <button type="button" class="btn btn-info  btn-rounded" mdbRipple (click)="new()">Novo</button>
           </div>
           <br />
 
@@ -31,8 +32,8 @@
                 <td>R${{carro.valorFIPE}}</td>
                 <td>{{carro.proprietarios.length}}</td>
                 <td class="direita">
-                    <button type="button" class="btn btn-warning  btn-rounded" mdbRipple routerLink="/admin/carros/edit/{{carro.id}}">Edit</button>
-                    <button type="button" class="btn btn-danger  btn-rounded" mdbRipple (click)="deleteById(carro)">Excluir</button>
+                  <button type="button" class="btn btn-warning  btn-rounded" mdbRipple (click)="edit(carro)">Edit</button>
+                  <button type="button" class="btn btn-danger  btn-rounded" mdbRipple (click)="deleteById(carro)">Excluir</button>
                 </td>
               </tr>
               }
@@ -43,3 +44,13 @@
     </div>
   </div>
 </div>
+
+<ng-template #modalCarrosDetails>
+  <div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Cadastro</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modalRef.close()"></button>
+  </div>
+  <div class="modal-body">
+    <app-carrosdetails [carro]="carroEdit" (retorno)="retornoDetails($event)"></app-carrosdetails>
+  </div>
+</ng-template>

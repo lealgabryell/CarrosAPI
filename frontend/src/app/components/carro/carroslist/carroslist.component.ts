@@ -1,20 +1,45 @@
-import { Component } from '@angular/core';
+import { Component, inject, TemplateRef, ViewChild } from '@angular/core';
 import { Carro } from '../../../models/carro';
 import { Marca } from '../../../models/marca';
 import { Proprietario } from '../../../models/proprietario';
 import { RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
+import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { CarrosdetailsComponent } from '../carrosdetails/carrosdetails.component';
 
 @Component({
   selector: 'app-carroslist',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, MdbModalModule, CarrosdetailsComponent],
   templateUrl: './carroslist.component.html',
   styleUrl: './carroslist.component.scss',
 })
 export class CarroslistComponent {
   lista: Carro[] = [];
+  carroEdit: Carro = new Carro();
+  //para abrir a modal
+  modalService = inject(MdbModalService);
+  @ViewChild('modalCarrosDetails') modalCarrosDetails!: TemplateRef<any>;
+  modalRef!: MdbModalRef<any>;
 
+  new() {
+    this.carroEdit = new Carro();
+    this.modalRef = this.modalService.open(this.modalCarrosDetails);
+  }
+  edit(carro: Carro) {
+    this.carroEdit = Object.assign({}, carro); //clonando para evitar referencia de objeto, e ele nao ser alterado em tempo real, apenas quando o cliente emitir o evento
+    this.modalRef = this.modalService.open(this.modalCarrosDetails)
+  }
+  retornoDetails(carro: Carro) {
+    if (carro.id > 0) {
+      let indice = this.lista.findIndex(x => { return x.id == carro.id })
+      this.lista[indice] = carro;
+    } else {
+      carro.id = this.lista.length + 1
+      this.lista.push(carro)
+    }
+    this.modalRef.close();
+  }
   constructor() {
 
     let proprietario1 = new Proprietario();

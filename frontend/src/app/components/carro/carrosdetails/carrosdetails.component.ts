@@ -34,6 +34,7 @@ export class CarrosdetailsComponent {
   findById(id: number) {
     //busca no backend
     let carroRetornado: Carro = new Carro();
+
     let proprietario1 = new Proprietario();
     proprietario1.id = 1;
     proprietario1.idade = 22;
@@ -63,7 +64,7 @@ export class CarrosdetailsComponent {
         icon: 'success',
         confirmButtonText: 'Ok'
       })
-      this.router2.navigate(['/admin/carros'], { state: { carroEditado: this.carro } })
+      this.router2.navigate(['/admin/ '], { state: { carroEditado: this.carro } })
     } else {
       Swal.fire({
         title: 'Sucesso!',

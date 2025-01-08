@@ -21,6 +21,7 @@
                 <th>VALOR</th>
                 <th>PROPRIETÁRIOS</th>
                 <th></th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -33,6 +34,8 @@
                 <td>{{carro.proprietarios.length}}</td>
                 <td class="direita">
                   <button type="button" class="btn btn-warning  btn-rounded" mdbRipple (click)="edit(carro)">Edit</button>
+                </td>
+                <td>
                   <button type="button" class="btn btn-danger  btn-rounded" mdbRipple (click)="deleteById(carro)">Excluir</button>
                 </td>
               </tr>

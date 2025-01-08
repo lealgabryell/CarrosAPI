@@ -1,11 +1,10 @@
 import { Component, inject, TemplateRef, ViewChild } from '@angular/core';
 import { Carro } from '../../../models/carro';
-import { Marca } from '../../../models/marca';
-import { Proprietario } from '../../../models/proprietario';
 import { RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 import { MdbModalModule, MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { CarrosdetailsComponent } from '../carrosdetails/carrosdetails.component';
+import { CarroService } from '../../../services/carro.service';
 
 @Component({
   selector: 'app-carroslist',
@@ -17,6 +16,8 @@ import { CarrosdetailsComponent } from '../carrosdetails/carrosdetails.component
 export class CarroslistComponent {
   lista: Carro[] = [];
   carroEdit: Carro = new Carro();
+
+  carroService = inject(CarroService);
   //para abrir a modal
   modalService = inject(MdbModalService);
   @ViewChild('modalCarrosDetails') modalCarrosDetails!: TemplateRef<any>;
@@ -40,43 +41,16 @@ export class CarroslistComponent {
     }
     this.modalRef.close();
   }
-  constructor() {
+  findAll() {
+    this.carroService.findAll().subscribe({
+      next: lista => { //quando o back retorna o que se espera
+        this.lista = lista;
 
-    let proprietario1 = new Proprietario();
-    proprietario1.id = 1;
-    proprietario1.idade = 22;
-    proprietario1.nome = 'Myguell';
-
-    let carro1 = new Carro();
-    carro1.id = 1;
-    carro1.nome = 'Fiesta';
-    carro1.valorFIPE = 30000.0;
-    carro1.proprietarios = [proprietario1];
-
-    let marca1 = new Marca();
-    marca1.id = 1;
-    marca1.nome = 'Ford';
-    marca1.cnpj = 'cnpjFORD';
-    marca1.carros = [];
-
-    carro1.marca = marca1;
-    this.lista.push(carro1);
-
-    let carroNovo = history.state.carroNovo;
-    let carroEditado = history.state.carroEditado;
-
-    if (carroNovo) {
-      carroNovo.id = this.lista.length + 1;
-      this.lista.push(carroNovo)
-    }
-
-    if (carroEditado) {
-      let indice = this.lista.findIndex((x) => {
-        return x.id == carroEditado.id;
-      });
-      this.lista[indice] = carroEditado;
-    }
-
+      },
+      error: err => { //quando ocorrer qualquer erro(badrequest, exceptions...)
+        alert('Ocorreu um erro!')
+      }
+    });
   }
 
   deleteById(carro: Carro) {
@@ -104,4 +78,21 @@ export class CarroslistComponent {
       }
     });
   }
+  constructor() {
+    let carroNovo = history.state.carroNovo;
+    let carroEditado = history.state.carroEditado;
+
+    if (carroNovo) {
+      carroNovo.id = this.lista.length + 1;
+      this.lista.push(carroNovo)
+    }
+
+    if (carroEditado) {
+      let indice = this.lista.findIndex((x) => {
+        return x.id == carroEditado.id;
+      });
+      this.lista[indice] = carroEditado;
+    }
+  }
+
 }
